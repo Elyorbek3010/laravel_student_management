@@ -3,8 +3,17 @@ nixPkgs = ['php82', 'php82Packages.composer']
 
 [phases.build]
 cmds = [
-  'composer install --no-dev --optimize-autoloader'
+  'composer install --no-dev --optimize-autoloader --no-scripts'
 ]
+
+[phases.install]
+cmds = []
+
+[phases.setup]
+nixPkgs = ['php82', 'php82Packages.composer']
 
 [start]
 cmd = 'php artisan serve --host=0.0.0.0 --port=$PORT'
+
+[variables]
+NIXPACKS_NO_CACHE = '1'
