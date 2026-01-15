@@ -1,37 +1,40 @@
-<x-layout>
-    <x-slot:heading>
-        Students
-    </x-slot>
+@extends('layouts.app')
 
-    <section class="space-y-6">
+@section('heading')
+    Students
+@endsection
 
-        <h1 class="text-xl sm:text-2xl font-semibold text-white">
-            These are our students:
-        </h1>
+@section('content')
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<section class="space-y-6">
 
-            @foreach ($students as $student)
-                <a href="/students/{{ $student->id }}"
-                    class="block rounded-lg border border-white/10 bg-gray-800/70
-                        p-4 hover:bg-gray-700/70 transition">
+    <h1 class="text-xl sm:text-2xl font-semibold text-white">
+        These are our students:
+    </h1>
 
-                    <p class="text-base sm:text-lg font-medium">
-                        {{ $student->student_name }} {{ $student->student_lastname }}
-                    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
-                    <p class="text-sm text-gray-300 mt-1">
-                        Student ID: {{ $student->id }}
-                    </p>
-                </a>
-            @endforeach
+        @foreach ($students as $student)
+            <a href="/students/{{ $student->id }}"
+               class="block rounded-lg border border-white/10 bg-gray-800/70
+                      p-4 hover:bg-gray-700/70 transition">
 
-        </div>
+                <p class="text-base sm:text-lg font-medium">
+                    {{ $student->student_name }} {{ $student->student_lastname }}
+                </p>
 
-        
-        <div class="pt-6">
-            {{ $students->links() }}
-        </div>
+                <p class="text-sm text-gray-300 mt-1">
+                    Student ID: {{ $student->id }}
+                </p>
+            </a>
+        @endforeach
 
-    </section>
-</x-layout>
+    </div>
+
+    <div class="pt-6">
+        {{ $students->links() }}
+    </div>
+
+</section>
+
+@endsection

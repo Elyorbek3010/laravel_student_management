@@ -1,31 +1,35 @@
-<x-layout>
-    <x-slot:heading>
-        User Details
-    </x-slot:heading>
+@extends('layouts.app')
 
-    <section class="max-w-2xl mx-auto space-y-6">
-        <div class="rounded-lg border border-white/10 bg-gray-800/70 p-6">
+@section('heading')
+    User Details
+@endsection
 
-            <h2 class="text-xl sm:text-2xl font-semibold text-white mb-4">
-                {{ $user['name'] }} {{ $user['last_name'] }}
-            </h2>
+@section('content')
 
-            <div class="space-y-2 text-sm sm:text-base text-gray-200">
-                <p>
-                    <span class="font-medium text-white">First name:</span>
-                    {{ $user['name'] }}
-                </p>
+<section class="max-w-2xl mx-auto space-y-6">
+    <div class="rounded-lg border border-white/10 bg-gray-800/70 p-6">
 
-                <p>
-                    <span class="font-medium text-white">Last name:</span>
-                    {{ $user['last_name'] }}
-                </p>
+        <h2 class="text-xl sm:text-2xl font-semibold text-white mb-4">
+            {{ $user['name'] }} {{ $user['last_name'] }}
+        </h2>
 
-                <p>
-                    <span class="font-medium text-white">User ID:</span>
-                    {{ $user['id'] }}
-                </p>
-            </div>
+        <div class="space-y-2 text-sm sm:text-base text-gray-200">
+            <p>
+                <span class="font-medium text-white">First name:</span>
+                {{ $user['name'] }}
+            </p>
+
+            <p>
+                <span class="font-medium text-white">Last name:</span>
+                {{ $user['last_name'] }}
+            </p>
+
+            <p>
+                <span class="font-medium text-white">User ID:</span>
+                {{ $user['id'] }}
+            </p>
         </div>
-    </section>
-</x-layout>
+    </div>
+</section>
+
+@endsection

@@ -1,8 +1,8 @@
-<x-layout>
-    <x-slot:heading>
-        Register
-    </x-slot>
+@extends('layouts.app')
 
+@section('heading', 'Register')
+
+@section('content')
 <form method="POST" action="/register" class="max-w-md mx-auto">
     @csrf
 
@@ -88,4 +88,4 @@
 
     </div>
 </form>
-</x-layout>
+@endsection

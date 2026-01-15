@@ -1,8 +1,8 @@
-<x-layout>
-    <x-slot:heading>
-        Login
-    </x-slot>
+@extends('layouts.app')
 
+@section('heading', 'Login')
+
+@section('content')
 <form method="POST" action="/login" class="max-w-md mx-auto">
     @csrf
 
@@ -55,4 +55,4 @@
         </div>
     </div>
 </form>
-</x-layout>
+@endsection

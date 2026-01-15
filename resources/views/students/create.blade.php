@@ -1,8 +1,8 @@
-<x-layout>
-    <x-slot:heading>
-        Create Student
-    </x-slot>
+@extends('layouts.app')
 
+@section('heading', 'Create Student')
+
+@section('content')
 <form method="POST" action="/students" class="max-w-3xl mx-auto">
     @csrf
 
@@ -71,4 +71,4 @@
 
     </div>
 </form>
-</x-layout>
+@endsection
