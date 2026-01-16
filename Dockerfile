@@ -36,11 +36,9 @@ RUN touch /var/www/html/database/database.sqlite
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chmod -R 775 storage bootstrap/cache database
+
+# Run migrations
+RUN php artisan migrate --force
+
 # Expose port
 EXPOSE 80
-
-
-
-
-
-
