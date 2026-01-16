@@ -31,8 +31,16 @@ COPY . .
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
+RUN touch /var/www/html/database/database.sqlite
+
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
+RUN chmod -R 775 storage bootstrap/cache database
 # Expose port
 EXPOSE 80
+
+
+
+
+
+
