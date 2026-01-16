@@ -8,7 +8,7 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
 # Enable Apache rewrite
 RUN a2enmod rewrite
 
-# Install system dependencies
+# Install system dependencies including Node.js
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -18,6 +18,10 @@ RUN apt-get update && apt-get install -y \
     zip \
     curl \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+# Install Node.js and npm
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -30,6 +34,10 @@ COPY . .
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
+
+# Install NPM dependencies and build assets
+RUN npm install
+RUN npm run build
 
 RUN touch /var/www/html/database/database.sqlite
 
