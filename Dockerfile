@@ -33,9 +33,10 @@ RUN composer install --no-dev --optimize-autoloader
 
 RUN touch /var/www/html/database/database.sqlite
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Set permissions BEFORE migrations
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database
 RUN chmod -R 775 storage bootstrap/cache database
+RUN chmod 664 /var/www/html/database/database.sqlite
 
 # Run migrations
 RUN php artisan migrate --force
