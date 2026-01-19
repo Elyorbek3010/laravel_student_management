@@ -38,9 +38,7 @@ RUN composer install --no-dev --optimize-autoloader
 # Install NPM dependencies and build assets
 RUN npm install
 RUN npm run build
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+
 
 RUN touch /var/www/html/database/database.sqlite
 
