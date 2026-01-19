@@ -47,10 +47,14 @@ RUN chown -R www-data:www-data storage bootstrap/cache database
 RUN chmod -R 775 storage bootstrap/cache database
 RUN chmod 664 database/database.sqlite
 
-# 🚨 IMPORTANT: run migrate BEFORE cache clear
+# Database migration
 RUN php artisan migrate --force
 
-# 🚨 FINAL STEP: clear ALL caches
-RUN php artisan optimize:clear
+# Optimize for production
+RUN php artisan optimize
+
+# Final permissions
+RUN chown -R www-data:www-data storage bootstrap/cache
+RUN chmod -R 775 storage bootstrap/cache
 
 EXPOSE 80
