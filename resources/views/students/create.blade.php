@@ -11,45 +11,93 @@
         <!-- FORM GRID -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-            <x-form-field>
-                <x-form-label for="id">Student ID</x-form-label>
+            <!-- Student ID -->
+            <div>
+                <label for="id" class="block text-sm/6 font-medium text-white">
+                    Student ID
+                </label>
                 <div class="mt-2">
-                    <x-form-input name="id" id="id" placeholder="Enter Student ID" />
+                    <div class="flex items-center rounded-md bg-white/5 pl-3 border border-black/10 focus-within:border-indigo-500">
+                        <input
+                            type="text"
+                            name="id"
+                            id="id"
+                            placeholder="Enter Student ID"
+                            value="{{ old('id') }}"
+                            class="block min-w-0 grow bg-transparent py-1.5 pr-3 pl-1 text-base placeholder:text-gray-500 focus:outline-none sm:text-sm/6"
+                        />
+                    </div>
                 </div>
-                <div class="mt-1">
-                    <x-form-error name="id" />
-                </div>
-            </x-form-field>
+                @error('id')
+                    <div class="mt-1 text-sm text-red-400">{{ $message }}</div>
+                @enderror
+            </div>
 
-            <x-form-field>
-                <x-form-label for="name">Student Name</x-form-label>
+            <!-- Student Name -->
+            <div>
+                <label for="name" class="block text-sm/6 font-medium text-white">
+                    Student Name
+                </label>
                 <div class="mt-2">
-                    <x-form-input name="name" id="name" placeholder="Enter Student Name" />
+                    <div class="flex items-center rounded-md bg-white/5 pl-3 border border-black/10 focus-within:border-indigo-500">
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            placeholder="Enter Student Name"
+                            value="{{ old('name') }}"
+                            class="block min-w-0 grow bg-transparent py-1.5 pr-3 pl-1 text-base placeholder:text-gray-500 focus:outline-none sm:text-sm/6"
+                        />
+                    </div>
                 </div>
-                <div class="mt-1">
-                    <x-form-error name="name" />
-                </div>
-            </x-form-field>
+                @error('name')
+                    <div class="mt-1 text-sm text-red-400">{{ $message }}</div>
+                @enderror
+            </div>
 
-            <x-form-field>
-                <x-form-label for="lastName">Student Lastname</x-form-label>
+            <!-- Student Lastname -->
+            <div>
+                <label for="lastName" class="block text-sm/6 font-medium text-white">
+                    Student Lastname
+                </label>
                 <div class="mt-2">
-                    <x-form-input name="lastName" id="lastName" placeholder="Enter Student Lastname" />
+                    <div class="flex items-center rounded-md bg-white/5 pl-3 border border-black/10 focus-within:border-indigo-500">
+                        <input
+                            type="text"
+                            name="lastName"
+                            id="lastName"
+                            placeholder="Enter Student Lastname"
+                            value="{{ old('lastName') }}"
+                            class="block min-w-0 grow bg-transparent py-1.5 pr-3 pl-1 text-base placeholder:text-gray-500 focus:outline-none sm:text-sm/6"
+                        />
+                    </div>
                 </div>
-                <div class="mt-1">
-                    <x-form-error name="lastName" />
-                </div>
-            </x-form-field>
+                @error('lastName')
+                    <div class="mt-1 text-sm text-red-400">{{ $message }}</div>
+                @enderror
+            </div>
 
-            <x-form-field>
-                <x-form-label for="birthPlace">Birth Place</x-form-label>
+            <!-- Birth Place -->
+            <div>
+                <label for="birthPlace" class="block text-sm/6 font-medium text-white">
+                    Birth Place
+                </label>
                 <div class="mt-2">
-                    <x-form-input name="birthPlace" id="birthPlace" placeholder="Enter Student Birth Place" />
+                    <div class="flex items-center rounded-md bg-white/5 pl-3 border border-black/10 focus-within:border-indigo-500">
+                        <input
+                            type="text"
+                            name="birthPlace"
+                            id="birthPlace"
+                            placeholder="Enter Student Birth Place"
+                            value="{{ old('birthPlace') }}"
+                            class="block min-w-0 grow bg-transparent py-1.5 pr-3 pl-1 text-base placeholder:text-gray-500 focus:outline-none sm:text-sm/6"
+                        />
+                    </div>
                 </div>
-                <div class="mt-1">
-                    <x-form-error name="birthPlace" />
-                </div>
-            </x-form-field>
+                @error('birthPlace')
+                    <div class="mt-1 text-sm text-red-400">{{ $message }}</div>
+                @enderror
+            </div>
 
         </div>
 

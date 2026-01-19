@@ -50,8 +50,8 @@ RUN chmod 664 database/database.sqlite
 # Database migration
 RUN php artisan migrate --force
 
-# Optimize for production
-RUN php artisan optimize
+# Don't cache - let Laravel compile at runtime
+# This avoids component discovery issues in Docker
 
 # Final permissions
 RUN chown -R www-data:www-data storage bootstrap/cache

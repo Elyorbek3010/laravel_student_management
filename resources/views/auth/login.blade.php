@@ -11,37 +11,50 @@
             Login to your account
         </h2>
         <div class="space-y-6">
-            <x-form-field>
-                <x-form-label for="email">Email</x-form-label>
+            <!-- Email Field -->
+            <div>
+                <label for="email" class="block text-sm/6 font-medium text-white">
+                    Email
+                </label>
                 <div class="mt-2">
-                    <x-form-input
-                        type="email"
-                        name="email"
-                        id="email"
-                        placeholder="Enter Email"
-                        required
-                    />
+                    <div class="flex items-center rounded-md bg-white/5 pl-3 border border-black/10 focus-within:border-indigo-500">
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            placeholder="Enter Email"
+                            value="{{ old('email') }}"
+                            required
+                            class="block min-w-0 grow bg-transparent py-1.5 pr-3 pl-1 text-base placeholder:text-gray-500 focus:outline-none sm:text-sm/6"
+                        />
+                    </div>
                 </div>
-                <div class="mt-1">
-                    <x-form-error name="email" />
-                </div>
-            </x-form-field>
+                @error('email')
+                    <div class="mt-1 text-sm text-red-400">{{ $message }}</div>
+                @enderror
+            </div>
 
-            <x-form-field>
-                <x-form-label for="password">Password</x-form-label>
+            <!-- Password Field -->
+            <div>
+                <label for="password" class="block text-sm/6 font-medium text-white">
+                    Password
+                </label>
                 <div class="mt-2">
-                    <x-form-input
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="Enter Password"
-                        required
-                    />
+                    <div class="flex items-center rounded-md bg-white/5 pl-3 border border-black/10 focus-within:border-indigo-500">
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            placeholder="Enter Password"
+                            required
+                            class="block min-w-0 grow bg-transparent py-1.5 pr-3 pl-1 text-base placeholder:text-gray-500 focus:outline-none sm:text-sm/6"
+                        />
+                    </div>
                 </div>
-                <div class="mt-1">
-                    <x-form-error name="password" />
-                </div>
-            </x-form-field>
+                @error('password')
+                    <div class="mt-1 text-sm text-red-400">{{ $message }}</div>
+                @enderror
+            </div>
         </div>
         <div class="pt-4">
             <button type="submit"
