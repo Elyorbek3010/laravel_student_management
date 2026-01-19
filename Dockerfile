@@ -1,14 +1,15 @@
 FROM php:8.2-apache
 
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+ENV APP_ENV=production
+ENV APP_DEBUG=false
 
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
     /etc/apache2/sites-available/*.conf
 
-# Enable Apache rewrite
 RUN a2enmod rewrite
 
-# Install system dependencies including Node.js
+# System dependencies
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
@@ -19,36 +20,37 @@ RUN apt-get update && apt-get install -y \
     curl \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Install Node.js and npm
+# Node.js
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs
 
-# Install Composer
+# Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Set working directory
 WORKDIR /var/www/html
 
-# Copy project files
+# Copy app
 COPY . .
 
-# Install PHP dependencies
+# PHP deps
 RUN composer install --no-dev --optimize-autoloader
 
-# Install NPM dependencies and build assets
+# Frontend build
 RUN npm install
 RUN npm run build
 
+# Database
+RUN touch database/database.sqlite
 
-RUN touch /var/www/html/database/database.sqlite
-
-# Set permissions BEFORE migrations
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database
+# Permissions
+RUN chown -R www-data:www-data storage bootstrap/cache database
 RUN chmod -R 775 storage bootstrap/cache database
-RUN chmod 664 /var/www/html/database/database.sqlite
+RUN chmod 664 database/database.sqlite
 
-# Run migrations
+# 🚨 IMPORTANT: run migrate BEFORE cache clear
 RUN php artisan migrate --force
 
-# Expose port
+# 🚨 FINAL STEP: clear ALL caches
+RUN php artisan optimize:clear
+
 EXPOSE 80
